@@ -83,12 +83,12 @@ for c in cities:
 
 print("Enter 2 coordinates to find the cities within those points")
 coor1 = input("Enter your second point (lat, lon)").split(',')
-lat1 = coor1[0]
-lon1 = coor1[1]
+lat1 = float(coor1[0])
+lon1 = float(coor1[1])
 
 coor2 = input("Enter your first point (lat, lon)").split(',')
-lat2 = coor2[0]
-lon2 = coor2[1]
+lat2 = float(coor2[0])
+lon2 = float(coor2[1])
 
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
@@ -100,11 +100,11 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # the specified coordinates.
 
     # make a square of coordinates by finding max and min
-    max_lat = float(max(lat1, lat2))
-    max_lon = float(max(lon1, lon2))
+    max_lat = max(lat1, lat2)
+    max_lon = max(lon1, lon2)
 
-    min_lat = float(min(lat1, lat2))
-    min_lon = float(min(lon1, lon2))
+    min_lat = min(lat1, lat2)
+    min_lon = min(lon1, lon2)
 
     print(max_lat, max_lon, min_lat, min_lon)
 
