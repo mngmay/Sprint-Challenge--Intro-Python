@@ -38,7 +38,7 @@ def cityreader(cities=[]):
     # print(data)
 
     for city in data[1:]:
-        new_city = City(city[0], city[3], city[4])
+        new_city = City(city[0], float(city[3]), float(city[4]))
         cities.append(new_city)
 
     return cities
@@ -109,8 +109,8 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     print(max_lat, max_lon, min_lat, min_lon)
 
     # determine whether the city coordinates is within the max/min
-    within = [city for city in cities if float(city.lat) >= min_lat and float(city.lat) <=
-              max_lat and float(city.lon) >= min_lon and float(city.lon) <= max_lon]
+    within = [city for city in cities if city.lat >= min_lat and city.lat <=
+              max_lat and city.lon >= min_lon and city.lon <= max_lon]
 
     return within
 
