@@ -24,9 +24,13 @@
 class Vehicle:
     pass
 
+# Subclass
+
 
 class FlightVehicle(Vehicle):
     pass
+
+# Children of FlightVehicle
 
 
 class Starship(FlightVehicle):
@@ -36,9 +40,13 @@ class Starship(FlightVehicle):
 class Airplane(FlightVehicle):
     pass
 
+# Subclass
+
 
 class GroundVehicle(Vehicle):
     pass
+
+# Children of GroundVehicle
 
 
 class Car(GroundVehicle):
