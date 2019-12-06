@@ -12,7 +12,7 @@ class City:
         self.lon = lon
 
     def __str__(self):
-        return f"({self.name}, {self.lat}, {self.lon})"
+        return f"{self.name}, {self.lat}, {self.lon}"
 
 
 # We have a collection of US cities with population over 750,000 stored in the
@@ -29,20 +29,15 @@ class City:
 # should not be loaded into a City object.
 cities = []
 
-print(cities)
-
-# with open('cities.csv') as csvfile:
-#   print(csvfile.read())
-
 
 def cityreader(cities=[]):
     # TODO Implement the functionality to read from the 'cities.csv' file
     # For each city record, create a new City instance and add it to the
     # `cities` list
     data = list(csv.reader(open('cities.csv')))
-    print(data)
+    # print(data)
 
-    for city in data:
+    for city in data[1:]:
         new_city = City(city[0], city[3], city[4])
         cities.append(new_city)
 
@@ -86,6 +81,15 @@ for c in cities:
 
 # TODO Get latitude and longitude values from the user
 
+print("Enter 2 coordinates to find the cities within those points")
+coor1 = input("Enter your second point (lat, lon)").split(',')
+lat1 = coor1[0]
+lon1 = coor1[1]
+
+coor2 = input("Enter your first point (lat, lon)").split(',')
+lat2 = coor2[0]
+lon2 = coor2[1]
+
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
@@ -95,4 +99,25 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # Go through each city and check to see if it falls within
     # the specified coordinates.
 
+    # make a square of coordinates by finding max and min
+    max_lat = float(max(lat1, lat2))
+    max_lon = float(max(lon1, lon2))
+
+    min_lat = float(min(lat1, lat2))
+    min_lon = float(min(lon1, lon2))
+
+    print(max_lat, max_lon, min_lat, min_lon)
+
+    # determine whether the city coordinates is within the max/min
+    within = [city for city in cities if float(city.lat) >= min_lat and float(city.lat) <=
+              max_lat and float(city.lon) >= min_lon and float(city.lon) <= max_lon]
+
     return within
+
+# logic notes
+# if max_lat >= city.lat >= min_lat
+# if max_lon >= city.lon >= min_lon
+
+
+for city in cityreader_stretch(lat1, lon1, lat2, lon2, cities):
+    print(f"{city.name}: ({city.lat}, {city.lon})")
