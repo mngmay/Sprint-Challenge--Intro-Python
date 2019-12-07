@@ -34,12 +34,26 @@ def cityreader(cities=[]):
     # TODO Implement the functionality to read from the 'cities.csv' file
     # For each city record, create a new City instance and add it to the
     # `cities` list
-    data = list(csv.reader(open('cities.csv')))
+
+    # Refactored version
+    with open('cities.csv', 'r') as csv_file:
+        data = csv.reader(csv_file, delimiter=",")
+        next(data)
+        for city in data:
+            new_city = City(city[0], float(city[3]), float(city[4]))
+            cities.append(new_city)
+
+    # Original version
+    # data = list(csv.reader(open('cities.csv')))
     # print(data)
 
-    for city in data[1:]:
-        new_city = City(city[0], float(city[3]), float(city[4]))
-        cities.append(new_city)
+    # for city in data[1:]:
+    #     new_city = City(city[0], float(city[3]), float(city[4]))
+    #     cities.append(new_city)
+
+    # Notes:
+    # Need to close file - with open automatically closes under hood
+    # next(reader) replaces the need for data slicing data[1:], removes the headers for csv
 
     return cities
 
